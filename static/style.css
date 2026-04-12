@@ -1,0 +1,298 @@
+/* --- Skema Warna Sesuai Dashboard --- */
+:root {
+    --header-brown: #7c6454;      
+    --accent-green: #c1d38b;      
+    --bg-cream: #e0e2d3;          
+    --text-dark: #3e3e3e;        
+    --card-white: #ffffff;        
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: var(--bg-cream); /* Sesuaikan background body */
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* --- Navbar (Menyesuaikan Header Dashboard) --- */
+.navbar {
+    background-color: var(--header-brown);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: var(--main-font); /* Pastikan navbar pakai font yang sama */
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700; /* Lebih tebal untuk logo */
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-family: var(--main-font);
+}
+
+.logo-icon {
+    background: var(--accent-green); /* Hijau Sage */
+    color: var(--header-brown);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-size: 18px; /* Ukuran menu disesuaikan agar tidak terlalu besar dibanding logo */
+    font-weight: 500;
+    transition: 0.3s;
+    font-family: var(--main-font);
+}
+
+.nav-link:hover {
+    color: var(--accent-green); /* Hover jadi hijau sage */
+}
+
+/* --- Update Hero Styles --- */
+.hero-section {
+    text-align: left; /* Sesuaikan dengan gambar Anda yang rata kiri */
+    margin-bottom: 60px;
+    padding-top: 40px; /* Tambah jarak dari navbar */
+}
+
+.hero-title {
+    font-size: 64px;       /* Ukuran diperbesar (sebelumnya 48px) */
+    font-weight: 800;
+    line-height: 1.1;      /* Memperrapat jarak antar baris agar terlihat padat */
+    margin-bottom: 24px;
+    color: var(--text-dark); /* Warna cokelat sangat tua/hitam */
+    letter-spacing: -1px;  /* Memberikan kesan desain modern */
+}
+
+/* Jika Anda ingin baris kedua "Analysis & Prediction" tetap cokelat terang */
+.hero-title span {
+    display: block;        /* Memastikan teks turun ke bawah */
+    font-size: 56px;       /* Sedikit lebih kecil dari baris pertama agar proporsional */
+    color: var(--header-brown); 
+    margin-top: 10px;
+}
+
+.landing-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.badge-ml {
+    background: var(--accent-green);
+    color: var(--header-brown);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.text-blue {
+    color: var(--header-brown); /* Mengganti aksen biru dengan cokelat tua */
+}
+
+/* --- Hero Button Group --- */
+.hero-btn-group {
+    display: flex;
+    gap: 20px;          /* Jarak antar tombol */
+    margin-top: 40px;   /* Jarak dari tulisan ke tombol */
+}
+
+.btn-hero {
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Tombol Dashboard - Warna Hijau Sage */
+.btn-dashboard {
+    background-color: var(--accent-green);
+    color: var(--header-brown);
+    box-shadow: 0 4px 15px rgba(193, 211, 139, 0.4);
+}
+
+.btn-dashboard:hover {
+    background-color: #b0c476;
+    transform: translateY(-3px);
+}
+
+/* Tombol Predict - Warna Cokelat Tua */
+.btn-predict {
+    background-color: var(--header-brown);
+    color: white;
+    box-shadow: 0 4px 15px rgba(124, 100, 84, 0.3);
+}
+
+.btn-predict:hover {
+    background-color: #5d4a3e;
+    transform: translateY(-3px);
+}
+
+/* --- Feature Cards (Mirip Box di Dashboard) --- */
+.feature-card {
+    background: var(--card-white);
+    padding: 30px;
+    border-radius: 4px; /* Dashboard Anda menggunakan sudut yang tidak terlalu bulat */
+    border: none;
+    border-top: 5px solid var(--accent-green); /* Aksen garis atas hijau */
+}
+
+/* --- Form Prediction Styles --- */
+.form-container {
+    background: var(--card-white);
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-top: 8px solid var(--accent-green); /* Aksen Hijau Sage di atas */
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    color: var(--header-brown);
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.section-title {
+    font-size: 18px;
+    color: var(--header-brown);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Grid System untuk Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Bagi 2 kolom */
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.input-group input, 
+.input-group select {
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-family: var(--main-font);
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    background-color: #fcfdf9;
+}
+
+/* Tombol Form */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background-color: var(--header-brown);
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #5d4a3e;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #666;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Responsif untuk layar HP */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Jadi 1 kolom di HP */
+    }
+}
+
+.bg-light-blue { background: var(--accent-green); }
+.bg-light-pink { background: var(--header-brown); color: white; }
+.bg-light-orange { background: #dcdcdc; }

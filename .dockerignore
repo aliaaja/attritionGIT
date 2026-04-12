@@ -1,0 +1,22 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDEs and OS files
+.vscode/
+.idea/
+.git
+.gitignore
+.DS_Store
+*.env
+
+# Docker files
+Dockerfile
+.dockerignore
