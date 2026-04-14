@@ -1,14 +1,19 @@
-from flask import Flask, render_template, request, jsonify
 import os
 import dagshub
 import mlflow
 import psycopg2
+from flask import Flask, render_template, request, jsonify
 
-# Inisialisasi DagsHub
+# 1. Set environment variable DULU sebelum init apa pun
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME', 'rahayuya2005')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD', '')
+os.environ['MLFLOW_TRACKING_URI'] = 'https://dagshub.com/rahayuya2005/attrition.mlflow'
+
+# 2. Inisialisasi DagsHub dengan token yang sudah ada di environment
 dagshub.init(repo_owner='rahayuya2005', repo_name='attrition', mlflow=True)
 
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
+# 3. Paksa MLflow pakai URI DagsHub
+mlflow.set_tracking_uri(os.environ['MLFLOW_TRACKING_URI'])
 
 def get_db_connection():
 
