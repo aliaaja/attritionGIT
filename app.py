@@ -7,8 +7,11 @@ import psycopg2
 # Inisialisasi DagsHub
 dagshub.init(repo_owner='rahayuya2005', repo_name='attrition', mlflow=True)
 
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
+
 def get_db_connection():
-    # Ambil URL dari Variables Railway yang tadi kamu copy-paste
+
     db_url = os.getenv("DATABASE_URL")
     return psycopg2.connect(db_url)
 
