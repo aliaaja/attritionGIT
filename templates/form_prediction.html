@@ -126,6 +126,16 @@ document.getElementById("saveBtn").addEventListener("click", function(){
         alert(data.message);
     });
 });
+document.getElementById("predictionForm").addEventListener("reset", function(){
+    // Sembunyikan hasil
+    document.getElementById("resultBox").style.display = "none";
+
+    // Kosongkan isi hasil (opsional)
+    document.getElementById("resultText").innerHTML = "";
+
+    // Reset data terakhir (opsional)
+    lastData = {};
+});
 </script>
 
 {% endblock %}
