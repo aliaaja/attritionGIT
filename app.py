@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import os
 
+import dagshub
+import mlflow
+
 import psycopg2
+
+dagshub.init(repo_owner='rahayuya2005', repo_name='attrition', mlflow=True)
+
 
 def get_db_connection():
     conn = psycopg2.connect(
