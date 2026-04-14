@@ -1,16 +1,22 @@
 from flask import Flask, render_template, request, jsonify
 import os
+
 import dagshub
 import mlflow
+
 import psycopg2
 
-# Inisialisasi DagsHub
 dagshub.init(repo_owner='rahayuya2005', repo_name='attrition', mlflow=True)
 
+
 def get_db_connection():
-    # Ambil URL dari Variables Railway yang tadi kamu copy-paste
-    db_url = os.getenv("DATABASE_URL")
-    return psycopg2.connect(db_url)
+    conn = psycopg2.connect(
+        host="localhost",
+        database="attrition",
+        user="postgres",
+        password=""
+    )
+    return conn
 
 app = Flask(__name__)
 
@@ -29,21 +35,34 @@ def predict_page():
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.form.to_dict()
+
+    print("DATA MASUK:", data)
+
+    # 🔥 contoh logika dummy dulu
     age = int(data.get('Age', 0))
     income = int(data.get('MonthlyIncome', 0))
 
-    # Dummy logic
     if age < 30 and income < 4000:
         result = "Berpotensi Resign"
     else:
         result = "Cenderung Bertahan"
 
+    # 🔥 WAJIB pakai JSON
     return jsonify({'result': result})
+
+from flask import jsonify
 
 @app.route('/save', methods=['POST'])
 def save():
     data = request.get_json()
-    
+
+    age = int(data.get('Age', 0))
+    income = int(data.get('MonthlyIncome', 0))
+    overtime = data.get('OverTime')
+    job_level = int(data.get('JobLevel', 0))
+    total_years = int(data.get('TotalWorkingYears', 0))
+    result = data.get('result')
+
     conn = get_db_connection()
     cur = conn.cursor()
 
@@ -51,14 +70,7 @@ def save():
         INSERT INTO predictions 
         (age, monthly_income, overtime, job_level, total_working_years, result)
         VALUES (%s, %s, %s, %s, %s, %s)
-    """, (
-        int(data.get('Age', 0)), 
-        int(data.get('MonthlyIncome', 0)), 
-        data.get('OverTime'), 
-        int(data.get('JobLevel', 0)), 
-        int(data.get('TotalWorkingYears', 0)), 
-        data.get('result')
-    ))
+    """, (age, income, overtime, job_level, total_years, result))
 
     conn.commit()
     cur.close()
@@ -67,6 +79,4 @@ def save():
     return jsonify({'message': 'Data berhasil disimpan ke database!'})
 
 if __name__ == '__main__':
-    # Railway butuh host 0.0.0.0 dan port dinamis
-    port = int(os.environ.get("PORT", 5002))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, port=5002)
