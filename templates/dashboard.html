@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Predict Attrition{% endblock %}
+
 {% block content %}
-<h1>Laporan Analitik Produk</h1>
+
+<h1 class="dashboard-title">Dashboard Analytics</h1>
+
 <div class="dashboard-container">
     <div class="iframe-wrapper">
-        <iframe width="1700" height="1255" src="https://lookerstudio.google.com/embed/reporting/0e9cab16-1fed-4cd3-9b6d-0e76b4c06638/page/HU3qF" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <iframe 
+            src="https://lookerstudio.google.com/embed/reporting/0e9cab16-1fed-4cd3-9b6d-0e76b4c06638/page/HU3qF"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+        </iframe>
     </div>
 </div>
+
 {% endblock %}

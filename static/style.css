@@ -1,4 +1,52 @@
 /* --- Skema Warna Sesuai Dashboard --- */
+
+/* ============================= */
+/* DASHBOARD EMBED STYLE */
+/* ============================= */
+
+/* Judul */
+.dashboard-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--header-brown);
+}
+
+/* Container tengah */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* Card iframe */
+.iframe-wrapper {
+    width: 1000px;
+    background: var(--card-white);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Iframe */
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .iframe-wrapper {
+        width: 95%;
+    }
+
+    .iframe-wrapper iframe {
+        height: 500px;
+    }
+}
+
 :root {
     --header-brown: #7c6454;      
     --accent-green: #c1d38b;      
@@ -296,3 +344,133 @@ body {
 .bg-light-blue { background: var(--accent-green); }
 .bg-light-pink { background: var(--header-brown); color: white; }
 .bg-light-orange { background: #dcdcdc; }
+
+/* ============================= */
+/* HASIL PREDIKSI (RESULT CARD) */
+/* ============================= */
+
+.result-card {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--card-white);
+    border-left: 6px solid var(--header-brown); /* aksen coklat */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Header */
+.result-header h3 {
+    margin: 0;
+    color: var(--header-brown);
+    font-size: 18px;
+}
+
+/* Isi hasil */
+.result-content {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* Status warna */
+.result-content .positive {
+    color: #d9534f; /* merah resign */
+    font-weight: 700;
+}
+
+.result-content .negative {
+    color: #28a745; /* hijau bertahan */
+    font-weight: 700;
+}
+
+/* Tombol simpan */
+.result-actions {
+    margin-top: 15px;
+}
+
+.btn-save {
+    background-color: var(--accent-green);
+    color: var(--header-brown);
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-save:hover {
+    background-color: #b0c476;
+    transform: translateY(-2px);
+}
+
+/* Animasi muncul */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pastikan container induk menggunakan flex */
+.hero-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Batasi lebar area teks agar tidak melebar ke kanan */
+.hero-text-container {
+    flex: 1;                  /* Mengambil 50% ruang */
+    text-align: left;
+    min-width: 450px;         /* Mencegah teks terlalu sempit */
+}
+
+/* Atur area gambar */
+.hero-image-container {
+    flex: 1;                  /* Mengambil 50% ruang */
+    display: flex;
+    justify-content: flex-end; /* Mendorong gambar ke arah kanan luar */
+}
+
+.hero-img {
+    width: 100%;
+    max-width: 500px;         /* Ukuran maksimal gambar */
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* Kecilkan judul agar proporsional */
+.hero-title {
+    font-size: 40px;          /* Ukuran teks diperkecil */
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-title span {
+    font-size: 36px;
+}
+
+/* Responsif: Jika layar terlalu kecil (HP), baru boleh tumpuk ke bawah */
+@media (max-width: 992px) {
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text-container {
+        min-width: unset;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}

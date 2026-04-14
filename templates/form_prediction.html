@@ -1,55 +1,131 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="landing-container">
     <div class="form-container">
+
         <div class="form-header">
-            <h2>✨ Employee Attrition Prediction</h2>
-            <p>Masukkan data karyawan di bawah ini untuk mendapatkan prediksi risiko attrition.</p>
+            <h2>Employee Attrition Prediction</h2>
+            <p>Masukkan data karyawan untuk memprediksi risiko attrition.</p>
         </div>
 
-        <form action="/predict" method="POST" class="prediction-form">
-            <div class="form-section">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>Umur (Age)</label>
-                        <input type="number" name="Age" placeholder="Contoh: 30" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Pendapatan Bulanan ($)</label>
-                        <input type="number" name="MonthlyIncome" placeholder="Contoh: 5000">
-                    </div>
-                    <div class="input-group">
-                        <label>Lembur (OverTime)</label>
-                        <select name="OverTime">
-                            <option value="" disabled selected>Pilih Opsi</option>
-                            <option value="Yes">Ya</option>
-                            <option value="No">Tidak</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Job Level (1-5)</label>
-                        <select name="JobLevel">
-                            <option value="" disabled selected>Pilih Job Level</option>
-                            <option value="1">Level 1</option>
-                            <option value="2">Level 2</option>
-                            <option value="3">Level 3</option>
-                            <option value="4">Level 4</option>
-                            <option value="5">Level 5</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Total Pengalaman Kerja (Tahun)</label>
-                        <input type="number" name="TotalWorkingYears">
-                    </div>
+        <form id="predictionForm">
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Umur</label>
+                    <input type="number" name="Age" placeholder="Contoh: 30" required>
                 </div>
+
+                <div class="input-group">
+                    <label>Pendapatan Bulanan</label>
+                    <input type="number" name="MonthlyIncome" placeholder="Contoh: 5000">
+                </div>
+
+                <div class="input-group">
+                    <label>Lembur</label>
+                    <select name="OverTime" required>
+                        <option value="">Pilih</option>
+                        <option value="Yes">Ya</option>
+                        <option value="No">Tidak</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Job Level</label>
+                    <select name="JobLevel" required>
+                        <option value="">Pilih</option>
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+
+               <div class="input-group">
+                    <label>Total Pengalaman Kerja</label>
+                    <input type="number" name="TotalWorkingYears" placeholder="Contoh: 5 tahun">
+                </div>
+
             </div>
 
             <div class="form-actions">
-                <button type="reset" class="btn-secondary">Reset Data</button>
-                <button type="submit" class="btn-submit">Analisis Sekarang</button>
+                <button type="reset" class="btn-secondary">Reset</button>
+                <button type="submit" class="btn-submit">Analisis</button>
             </div>
+
         </form>
+
+        <!-- RESULT -->
+        <div id="resultBox" class="result-card">
+
+            <div class="result-header">
+                <h3>Hasil Prediksi</h3>
+            </div>
+
+            <div class="result-content" id="resultText"></div>
+
+            <div class="result-actions">
+                <button id="saveBtn" class="btn-save">Simpan Hasil</button>
+            </div>
+
+        </div>
+
     </div>
 </div>
+
+<script>
+let lastData = {};
+
+document.getElementById("predictionForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("/predict", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        let resultText = document.getElementById("resultText");
+
+        if(data.result.toLowerCase().includes("resign")){
+            resultText.innerHTML = 'Karyawan <span class="positive">Berpotensi Resign</span>';
+        } else {
+            resultText.innerHTML = 'Karyawan <span class="negative">Cenderung Bertahan</span>';
+        }
+
+        document.getElementById("resultBox").style.display = "block";
+
+        lastData = {
+            Age: formData.get("Age"),
+            MonthlyIncome: formData.get("MonthlyIncome"),
+            OverTime: formData.get("OverTime"),
+            JobLevel: formData.get("JobLevel"),
+            TotalWorkingYears: formData.get("TotalWorkingYears"),
+            result: data.result
+        };
+    });
+});
+
+document.getElementById("saveBtn").addEventListener("click", function(){
+    fetch("/save", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(lastData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+});
+</script>
+
 {% endblock %}
